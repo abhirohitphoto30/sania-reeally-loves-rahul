@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Sania ke liye ek khaas sawaal 💌</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blush:#ffe3ea;
+    --rose:#ff6f91;
+    --deep-rose:#c93f6b;
+    --berry:#7a2848;
+    --cream:#fff6f2;
+    --gold:#ffc26f;
+    --ink:#4a2233;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html,body{
+    height:100%;
+    width:100%;
+    overflow:hidden;
+    font-family:'Poppins',sans-serif;
+    color:var(--ink);
+    background:radial-gradient(circle at 20% 20%, #ffdce7, #ffc9dc 40%, #ff9fbb 100%);
+    transition:background 0.8s ease;
+  }
+
+  body[data-slide="1"]{background:radial-gradient(circle at 30% 20%, #fff0e8, #ffd6c9 45%, #ffb199 100%);}
+  body[data-slide="2"]{background:radial-gradient(circle at 70% 30%, #f3e6ff, #e0c3ff 45%, #c99bff 100%);}
+  body[data-slide="3"]{background:radial-gradient(circle at 30% 70%, #ffe6f0, #ffb8d2 45%, #ff7fa8 100%);}
+  body[data-slide="4"]{background:radial-gradient(circle at 50% 50%, #fff0f4, #ffc6d9 45%, #ff8fae 100%);}
+
+  #heart-field{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:1;
+  }
+
+  .drift-heart{
+    position:absolute;
+    bottom:-10vh;
+    font-size:22px;
+    opacity:0.55;
+    animation:floatUp linear infinite;
+    filter:drop-shadow(0 2px 4px rgba(122,40,72,0.15));
+  }
+
+  @keyframes floatUp{
+    0%{transform:translateY(0) translateX(0) rotate(0deg); opacity:0;}
+    10%{opacity:0.6;}
+    100%{transform:translateY(-115vh) translateX(var(--drift,20px)) rotate(360deg); opacity:0;}
+  }
+
+  .stage{
+    position:relative;
+    z-index:2;
+    height:100vh;
+    width:100vw;
+  }
+
+  .slide{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:32px 20px;
+    opacity:0;
+    visibility:hidden;
+    transform:scale(0.92) translateY(14px);
+    transition:opacity 0.55s ease, transform 0.55s ease, visibility 0.55s;
+  }
+
+  .slide.active{
+    opacity:1;
+    visibility:visible;
+    transform:scale(1) translateY(0);
+  }
+
+  .card{
+    background:rgba(255,255,255,0.55);
+    backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,0.7);
+    border-radius:28px;
+    padding:44px 34px;
+    max-width:480px;
+    width:100%;
+    box-shadow:0 20px 60px rgba(122,40,72,0.18);
+    position:relative;
+  }
+
+  .eyebrow-emoji{
+    font-size:38px;
+    display:block;
+    margin-bottom:14px;
+    animation:sway 2.6s ease-in-out infinite;
+  }
+
+  @keyframes sway{
+    0%,100%{transform:rotate(-6deg);}
+    50%{transform:rotate(6deg);}
+  }
+
+  h1{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:clamp(24px,5vw,34px);
+    color:var(--berry);
+    line-height:1.3;
+    margin-bottom:10px;
+  }
+
+  .sub{
+    font-size:14.5px;
+    color:var(--deep-rose);
+    margin-bottom:30px;
+    font-weight:500;
+    line-height:1.6;
+  }
+
+  .btn-zone{
+    position:relative;
+    min-height:190px;
+    width:100%;
+  }
+
+  .btn{
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    font-size:15px;
+    padding:15px 22px;
+    border-radius:999px;
+    border:none;
+    cursor:pointer;
+    box-shadow:0 10px 24px rgba(201,63,107,0.28);
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .btn:active{transform:scale(0.95);}
+
+  .btn-primary{
+    background:linear-gradient(135deg,var(--rose),var(--deep-rose));
+    color:#fff;
+  }
+
+  .btn-primary:hover{transform:translateY(-2px) scale(1.03);}
+
+  .btn-ghost{
+    background:#fff;
+    color:var(--deep-rose);
+    border:2px solid var(--rose);
+  }
+
+  .roaming{
+    position:absolute;
+  }
+
+  .static-stack{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    align-items:center;
+  }
+
+  .no-btn{
+    position:absolute;
+  }
+
+  .hint{
+    font-size:12px;
+    color:var(--berry);
+    opacity:0.65;
+    margin-top:18px;
+    font-style:italic;
+  }
+
+  /* Slide 4 finale */
+  .big-heart{
+    font-size:64px;
+    display:block;
+    margin-bottom:6px;
+    animation:beat 1.1s ease-in-out infinite;
+  }
+
+  @keyframes beat{
+    0%,100%{transform:scale(1);}
+    25%{transform:scale(1.18);}
+    45%{transform:scale(0.95);}
+  }
+
+  .names{
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-weight:600;
+    color:var(--deep-rose);
+    font-size:16px;
+    margin-top:16px;
+  }
+
+  #confetti-field{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:5;
+    overflow:hidden;
+  }
+
+  .confetti-piece{
+    position:absolute;
+    top:-5vh;
+    border-radius:2px;
+    animation:fall linear forwards;
+  }
+
+  @keyframes fall{
+    to{transform:translateY(110vh) rotate(540deg); opacity:0.2;}
+  }
+
+  .dots{
+    display:flex;
+    gap:6px;
+    justify-content:center;
+    margin-top:26px;
+  }
+
+  .dot{
+    width:7px;height:7px;border-radius:50%;
+    background:rgba(122,40,72,0.25);
+    transition:background 0.3s;
+  }
+
+  .dot.active{background:var(--deep-rose);width:20px;border-radius:5px;}
+
+  @media (max-width:420px){
+    .card{padding:34px 22px;}
+    .btn-zone{min-height:220px;}
+  }
+</style>
+</head>
+<body data-slide="1">
+
+<div id="heart-field"></div>
+<div id="confetti-field"></div>
+
+<div class="stage">
+
+  <!-- SLIDE 1 -->
+  <section class="slide active" id="slide-1">
+    <div class="card">
+      <span class="eyebrow-emoji">🌸</span>
+      <h1>Hlo Sania... aaj tumhara din kaisa raha?</h1>
+      <p class="sub">Jo bhi jawab do, thoda pakadna padega 😜</p>
+      <div class="btn-zone" id="zone1">
+        <button class="btn btn-primary roaming" id="opt1a">It was good 💖</button>
+        <button class="btn btn-ghost roaming" id="opt1b">Hmm, not bad 🙈</button>
+      </div>
+      <p class="hint">dono buttons thodi masti mood mein hain ✨</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 2 -->
+  <section class="slide" id="slide-2">
+    <div class="card">
+      <span class="eyebrow-emoji">🥺</span>
+      <h1>Kya tum mujhe ek mushkil sa sawaal <br>puchne ki ijazat dogi?</h1>
+      <p class="sub">Dil thaam ke rakhna, thoda serious wala hai 💌</p>
+      <div class="btn-zone" id="zone2">
+        <button class="btn btn-primary" id="yes2" style="position:absolute; left:50%; top:20px; transform:translateX(-50%);">Yes 😊</button>
+        <button class="btn btn-ghost no-btn" id="no2" style="left:50%; top:100px; transform:translateX(-50%);">No</button>
+      </div>
+      <p class="hint">"No" thoda sharmeela hai, pakad ke dikhao 😏</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 3 -->
+  <section class="slide" id="slide-3">
+    <div class="card">
+      <span class="eyebrow-emoji">👀</span>
+      <h1>Sach sach batana... <br>kya tumhe Rahul pasand hai?</h1>
+      <p class="sub">Jawab dene se pehle dil pe haath rakh lo 🫣</p>
+      <div class="btn-zone" id="zone3" style="min-height:220px;">
+        <button class="btn btn-primary" id="yes3a" style="position:absolute; left:50%; top:10px; transform:translateX(-50%); white-space:nowrap;">Haan, thoda thoda pasand hai 😳</button>
+        <button class="btn btn-primary" id="yes3b" style="position:absolute; left:50%; top:70px; transform:translateX(-50%); white-space:nowrap;">Haan yaar, bahut zyada 😍</button>
+        <button class="btn btn-ghost no-btn" id="no3" style="left:50%; top:140px; transform:translateX(-50%);">Nahi, bilkul nahi</button>
+      </div>
+      <p class="hint">"Nahi" wala button bhi thoda confuse hai, bhaagta rahega 🏃‍♀️</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 4 -->
+  <section class="slide" id="slide-4">
+    <div class="card">
+      <span class="big-heart">💖</span>
+      <h1>Maine pehle hi jaan liya tha... <br>ki Rahul tumhe pasand haiii.... 😌</h1>
+      <p class="sub">Utltimately chorii to pkdi gayiiii apkiii......😂<br><br>
+      Sach yeh hai, Sania — tumhari smile, tumhari baaton ka andaaz, sab kuch mai pehle hi pehchaan gyaa thaa.....🫶🫶....🌹</p>
+      <div class="names">u really a beauty yrrr ✨</div>
+      <button class="btn btn-primary" id="restart" style="margin-top:22px;">Dobara se dekho 🔁</button>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  const body = document.body;
+  const slides = [1,2,3,4].map(n => document.getElementById('slide-'+n));
+
+  function goTo(n){
+    body.dataset.slide = n;
+    slides.forEach((s,i)=> s.classList.toggle('active', i === n-1));
+    if(n === 4){ setTimeout(burstConfetti, 250); }
+  }
+
+  // ---------- floating hearts background ----------
+  const heartEmojis = ['💗','💕','🌸','✨','💖','🌷'];
+  const field = document.getElementById('heart-field');
+  function spawnHeart(){
+    const h = document.createElement('span');
+    h.className = 'drift-heart';
+    h.textContent = heartEmojis[Math.floor(Math.random()*heartEmojis.length)];
+    const left = Math.random()*100;
+    h.style.left = left + 'vw';
+    h.style.setProperty('--drift', (Math.random()*80-40)+'px');
+    h.style.fontSize = (14 + Math.random()*20) + 'px';
+    const dur = 9 + Math.random()*8;
+    h.style.animationDuration = dur + 's';
+    field.appendChild(h);
+    setTimeout(()=> h.remove(), dur*1000 + 500);
+  }
+  for(let i=0;i<12;i++) setTimeout(spawnHeart, i*350);
+  setInterval(spawnHeart, 700);
+
+  // ---------- slide 1: roaming buttons ----------
+  const zone1 = document.getElementById('zone1');
+  const opt1a = document.getElementById('opt1a');
+  const opt1b = document.getElementById('opt1b');
+
+  function randomPositionIn(zone, el){
+    const zw = zone.clientWidth, zh = zone.clientHeight;
+    const ew = el.offsetWidth || 160, eh = el.offsetHeight || 46;
+    const x = Math.max(4, Math.random()*(zw-ew-4));
+    const y = Math.max(4, Math.random()*(zh-eh-4));
+    el.style.left = x+'px';
+    el.style.top = y+'px';
+  }
+
+  function placeInitial1(){
+    opt1a.style.left = '10%'; opt1a.style.top = '10px';
+    opt1b.style.left = '20%'; opt1b.style.top = '100px';
+  }
+  placeInitial1();
+
+  let roam1;
+  function startRoaming(){
+    roam1 = setInterval(()=>{
+      randomPositionIn(zone1, opt1a);
+      randomPositionIn(zone1, opt1b);
+    }, 550);
+  }
+  startRoaming();
+
+  [opt1a, opt1b].forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      clearInterval(roam1);
+      goTo(2);
+    });
+  });
+
+  // ---------- evasive "no" button logic (slide 2 & 3) ----------
+  function makeEvasive(noBtn, zone){
+    function flee(clientX, clientY){
+      const rect = zone.getBoundingClientRect();
+      const zw = zone.clientWidth, zh = zone.clientHeight;
+      const ew = noBtn.offsetWidth, eh = noBtn.offsetHeight;
+      let x, y, tries = 0;
+      do{
+        x = Math.random()*(zw-ew);
+        y = Math.random()*(zh-eh);
+        tries++;
+      } while(tries < 8 && clientX !== undefined &&
+              Math.hypot((rect.left+x+ew/2)-clientX, (rect.top+y+eh/2)-clientY) < 90);
+      noBtn.style.left = x+'px';
+      noBtn.style.top = y+'px';
+    }
+
+    // initial random spot
+    flee();
+
+    zone.addEventListener('mousemove', (e)=>{
+      const r = noBtn.getBoundingClientRect();
+      const cx = r.left + r.width/2, cy = r.top + r.height/2;
+      const dist = Math.hypot(e.clientX-cx, e.clientY-cy);
+      if(dist < 95){ flee(e.clientX, e.clientY); }
+    });
+
+    // touch devices: flee the instant a touch lands near/on it
+    noBtn.addEventListener('touchstart', (e)=>{
+      e.preventDefault();
+      flee();
+    }, {passive:false});
+
+    noBtn.addEventListener('mouseenter', ()=> flee());
+    noBtn.addEventListener('pointerdown', (e)=>{ e.preventDefault(); flee(); });
+
+    // block any accidental click from firing
+    noBtn.addEventListener('click', (e)=> e.preventDefault());
+  }
+
+  const zone2 = document.getElementById('zone2');
+  const yes2 = document.getElementById('yes2');
+  const no2 = document.getElementById('no2');
+  makeEvasive(no2, zone2);
+  yes2.addEventListener('click', ()=> goTo(3));
+
+  const zone3 = document.getElementById('zone3');
+  const yes3a = document.getElementById('yes3a');
+  const yes3b = document.getElementById('yes3b');
+  const no3 = document.getElementById('no3');
+  makeEvasive(no3, zone3);
+  [yes3a, yes3b].forEach(b=> b.addEventListener('click', ()=> goTo(4)));
+
+  // ---------- confetti burst on finale ----------
+  const confettiField = document.getElementById('confetti-field');
+  const confettiColors = ['#ff6f91','#ffc26f','#c93f6b','#ffb1c8','#fff0e8'];
+  function burstConfetti(){
+    for(let i=0;i<60;i++){
+      setTimeout(()=>{
+        const p = document.createElement('div');
+        p.className = 'confetti-piece';
+        const size = 6 + Math.random()*7;
+        p.style.width = size+'px';
+        p.style.height = (size*0.4)+'px';
+        p.style.left = Math.random()*100+'vw';
+        p.style.background = confettiColors[Math.floor(Math.random()*confettiColors.length)];
+        const dur = 3 + Math.random()*2.5;
+        p.style.animationDuration = dur+'s';
+        confettiField.appendChild(p);
+        setTimeout(()=> p.remove(), dur*1000+300);
+      }, i*30);
+    }
+  }
+
+  document.getElementById('restart').addEventListener('click', ()=>{
+    goTo(1);
+    placeInitial1();
+    clearInterval(roam1);
+    startRoaming();
+  });
+
+  goTo(1);
+})();
+</script>
+
+</body>
+</html>
